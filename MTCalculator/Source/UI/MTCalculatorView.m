@@ -11,7 +11,7 @@
 #import "MTLoadingView.h"
 
 static NSString * const validateSymbols[] = {@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9",
-                                             @".", @"*", @"/", @"+", @"-", @"="};
+                                             @".", @"*", @"/", @"+", @"-", @"=", @"-"};
 
 @interface MTCalculatorView ()
 @property (nonatomic, strong) MTLoadingView *loadingView;
@@ -151,9 +151,10 @@ static NSString * const validateSymbols[] = {@"0", @"1", @"2", @"3", @"4", @"5",
     self.percentEntered = NO;
 }
 
-- (void)changeSign {
+- (void)changeSign:(UIButton *)sender {
     self.result = - self.result;
     [self printDisplay];
+    [self showInfoSecondLabelWithSenderTag:sender.tag];
 }
 
 #pragma mark -
@@ -164,6 +165,10 @@ static NSString * const validateSymbols[] = {@"0", @"1", @"2", @"3", @"4", @"5",
     
     if (!self.isOperatorEnter) {
         indicator.text = @"";
+    }
+    
+    if (tag == 17) {
+        indicator.text = [NSString stringWithFormat:@"%@%g",[NSString stringWithString:validateSymbols[tag]], self.result];
     }
     
     tag == 15

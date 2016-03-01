@@ -44,7 +44,7 @@ typedef NS_ENUM(NSUInteger, MTOperators) {
 
 - (void)enterPointForNumber;
 - (void)calculatePercentage;
-- (void)changeSign;
+- (void)changeSign:(UIButton *)sender;
 
 
 @end

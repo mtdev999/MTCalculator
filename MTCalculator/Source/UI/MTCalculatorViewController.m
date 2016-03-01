@@ -9,6 +9,7 @@
 #import "MTCalculatorViewController.h"
 
 #import "MTCalculatorView.h"
+#import "MTSettingsViewController.h"
 
 @interface MTCalculatorViewController ()
 @property (nonatomic, strong)   MTCalculatorView *calculatorView;
@@ -35,6 +36,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationItem.title = @"iCalculator";
+    [self addBarButtonItems];
+    
     [self.calculatorView showLoadingView];
 }
 
@@ -48,9 +52,6 @@
 
 #pragma mark -
 #pragma mark Actions
-
-
-
 
 - (IBAction)onClearAll:(UIButton *)sender {
     [self.calculatorView clearAllValues];
@@ -75,7 +76,28 @@
 }
 
 - (IBAction)onChangeSign:(UIButton *)sender {
-    [self.calculatorView changeSign];
+    [self.calculatorView changeSign:sender];
+}
+
+- (void)actionSettingsButton:(UIBarButtonItem *)sender {
+    MTSettingsViewController *vc = [[MTSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    //vc.view.backgroundColor = [UIColor colorWithWhite:1 alpha:0.3];
+    
+    
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+#pragma mark -
+#pragma mark Private 
+
+- (void)addBarButtonItems {
+    UIBarButtonItem *settingsItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings"
+                                                                     style:UIBarButtonItemStylePlain
+                                                                    target:self
+                                                                    action:@selector(actionSettingsButton:)];
+    self.navigationItem.leftBarButtonItem = settingsItem;
 }
 
 @end

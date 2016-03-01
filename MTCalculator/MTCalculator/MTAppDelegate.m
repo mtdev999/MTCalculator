@@ -23,7 +23,12 @@
     UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     self.window = window;
-    window.rootViewController =[[MTCalculatorViewController alloc] initWithNibName:@"MTCalculatorViewController" bundle:nil];
+    
+    MTCalculatorViewController *controller = [[MTCalculatorViewController alloc] initWithNibName:@"MTCalculatorViewController" bundle:nil];
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+    
+    window.rootViewController = navController;
     
     [window makeKeyAndVisible];
     return YES;
